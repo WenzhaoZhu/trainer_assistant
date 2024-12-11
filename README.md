@@ -2,7 +2,7 @@
 
 ## Updates
 ### Dec. 11, 2024
-- Running the code will generate a file named ```convert_cn.txt``` that contains all the Latex formula quotes of B(Chinese response).
+- Running the code will generate a file named ```convert_cn.txt``` that contains all the Latex formulas of B(Chinese response).
 ### Dec. 10, 2024
 - Detect whether the formulas from A and B are completely the same.
 
