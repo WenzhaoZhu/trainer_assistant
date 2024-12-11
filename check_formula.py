@@ -71,7 +71,7 @@ def conv_into_sth(in_fb, st_fb):
 
     with open(os.path.join(RELA_PATH, FILE_WRITE), "w", encoding="utf-16") as f:
         for i in clt:
-            f.write(i + "\n")
+            f.write(i + "\n\n")
     
 
 
