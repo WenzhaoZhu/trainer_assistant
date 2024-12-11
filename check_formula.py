@@ -69,7 +69,7 @@ def conv_into_sth(in_fb, st_fb):
         a = a.replace(r"\]", r"\\]")
         clt.append(a)        
 
-    with open(os.path.join(RELA_PATH, FILE_WRITE), "w") as f:
+    with open(os.path.join(RELA_PATH, FILE_WRITE), "w", encoding="utf-16") as f:
         for i in clt:
             f.write(i + "\n")
     
