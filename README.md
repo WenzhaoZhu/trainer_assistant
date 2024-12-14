@@ -1,6 +1,8 @@
 # trainer_assistant user manual
 
 ## Updates
+### Dec. 14, 2024
+- Optimize the visual effects of the output.
 ### Dec. 11, 2024
 - Running the code will generate a file named ```convert_cn.txt``` that contains all the Latex formulas of B(Chinese response).
 ### Dec. 10, 2024
