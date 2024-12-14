@@ -30,43 +30,36 @@ def find_formula(text):
 
     return inline_matches, standalone_matches
 
-def match_inline_formula(in_fa, in_fb):
-
-    for item in in_fb:
-        if item in in_fa:
-            in_fa.remove(item)
+def match_formula(_fa, _fb, prefix):
+    in_B_not_in_A = 0
+    for item in _fb:
+        if item in _fa:
+            _fa.remove(item)
         else:
-            print(item, "in B can't be found in A!")
+            if not in_B_not_in_A:
+                if prefix == "standalone":
+                    print("\n------------- [Formulas in B but not in A] -------------")
+                else:
+                    print("------------- [Formulas in B but not in A] -------------")
+                in_B_not_in_A = 1
+            print(item)
             continue
 
-    if len(in_fa):
-        print("\n")
-        for item in in_fa:
-            print(item, "in A but can't be found in B!")
+    if len(_fa):
+        print("------------- [Formulas in A but not in B] -------------")
+        for item in _fa:
+            print(item)
 
-def match_standalone_formula(st_fa, st_fb):
 
-    for item in st_fb:
-        if item in st_fa:
-            st_fa.remove(item)
-        else:
-            print(item, "in B can't be found in A!")
-            continue
-
-    if len(st_fa):
-        print("\n")
-        for item in st_fa:
-            print(item, "in A but can't be found in B!")
-
-def conv_into_sth(in_fb, st_fb):
+def conv_into_jupyter_friendly(in_fb, st_fb):
     clt = []
     for c in in_fb:
-        a = c.replace(r"\(", r"\\(") 
-        a = a.replace(r"\)", r"\\)")
+        a = c.replace(r"\(", r"$") 
+        a = a.replace(r"\)", r"$")
         clt.append(a)
     for c in st_fb:
-        a = c.replace(r"\[", r"\\[") 
-        a = a.replace(r"\]", r"\\]")
+        a = c.replace(r"\[", r"$$") 
+        a = a.replace(r"\]", r"$$")
         clt.append(a)        
 
     with open(os.path.join(RELA_PATH, FILE_WRITE), "w", encoding="utf-16") as f:
@@ -87,7 +80,7 @@ if __name__ == "__main__":
     inline_fa, standalone_fa = find_formula(text_A)
     inline_fb, standalone_fb = find_formula(text_B)
 
-    conv_into_sth(inline_fb, standalone_fb)
+    conv_into_jupyter_friendly(inline_fb, standalone_fb)
 
-    match_inline_formula(inline_fa, inline_fb)
-    match_standalone_formula(standalone_fa, standalone_fb)
+    match_formula(inline_fa, inline_fb, "inline")
+    match_formula(standalone_fa, standalone_fb, "standalone")
