@@ -32,23 +32,29 @@ def find_formula(text):
 
 def match_formula(_fa, _fb, prefix):
     in_B_not_in_A = 0
+    in_A_not_in_B = 0
+
     for item in _fb:
         if item in _fa:
             _fa.remove(item)
         else:
             if not in_B_not_in_A:
-                if prefix == "standalone":
-                    print("\n------------- [Formulas in B but not in A] -------------")
+                if prefix == "Standalone":
+                    print("\n------------- [Standalone Formulas in B but not in A] -------------")
                 else:
-                    print("------------- [Formulas in B but not in A] -------------")
+                    print("------------- [Inline Formulas in B but not in A] -------------")
                 in_B_not_in_A = 1
             print(item)
             continue
 
     if len(_fa):
-        print("------------- [Formulas in A but not in B] -------------")
+        print("------------- [", prefix,"Formulas in A but not in B] -------------")
+        in_A_not_in_B = 1
         for item in _fa:
             print(item)
+            
+    if in_B_not_in_A + in_A_not_in_B == 0:
+        print("--- No", prefix, " formula difference detected! ---")
 
 
 def conv_into_jupyter_friendly(in_fb, st_fb):
@@ -82,5 +88,5 @@ if __name__ == "__main__":
 
     conv_into_jupyter_friendly(inline_fb, standalone_fb)
 
-    match_formula(inline_fa, inline_fb, "inline")
-    match_formula(standalone_fa, standalone_fb, "standalone")
+    match_formula(inline_fa, inline_fb, "Inline")
+    match_formula(standalone_fa, standalone_fb, "Standalone")
